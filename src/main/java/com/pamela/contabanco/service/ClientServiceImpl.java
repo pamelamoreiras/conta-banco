@@ -16,7 +16,7 @@ public class ClientServiceImpl {
         return cnpjAccount(clientRequest);
     }
 
-    private ClientResponse cpfAccount(ClientRequest clientRequest){
+    private ClientResponse cpfAccount(final ClientRequest clientRequest){
         ClientResponse account = ClientResponse.builder().build();
 
         if (clientRequest.getDocument().length() == 11 ) {
@@ -42,7 +42,7 @@ public class ClientServiceImpl {
         return account;
     }
 
-    private ClientResponse cnpjAccount(ClientRequest clientRequest) {
+    private ClientResponse cnpjAccount(final ClientRequest clientRequest) {
 
         ClientResponse account = ClientResponse.builder().build();
 
