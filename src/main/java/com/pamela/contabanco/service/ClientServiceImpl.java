@@ -7,8 +7,16 @@ import org.springframework.stereotype.Service;
 @Service
 public class ClientServiceImpl {
 
-    public ClientResponse verifyTypeOfAccount(final ClientRequest clientRequest){
+    public ClientResponse execute(final ClientRequest clientRequest){
 
+        if (clientRequest.getDocument().length() == 11){
+            return cpfAccount(clientRequest);
+        }
+
+        return cnpjAccount(clientRequest);
+    }
+
+    private ClientResponse cpfAccount(ClientRequest clientRequest){
         ClientResponse account = ClientResponse.builder().build();
 
         if (clientRequest.getDocument().length() == 11 ) {
@@ -30,6 +38,14 @@ public class ClientServiceImpl {
                         .build();
             }
         }
+
+        return account;
+    }
+
+    private ClientResponse cnpjAccount(ClientRequest clientRequest) {
+
+        ClientResponse account = ClientResponse.builder().build();
+
         if (clientRequest.getDocument().length() == 14) {
             if (clientRequest.getSalary() >= 3000) {
                 account = ClientResponse.builder()
